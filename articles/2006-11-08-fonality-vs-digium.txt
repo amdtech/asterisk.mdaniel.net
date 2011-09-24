@@ -1,0 +1,29 @@
+---
+title: Fonality vs. Digium
+author: Aaron Daniel
+date: 08/11/2006
+category: opinions
+tags: 
+
+This is a cross posting in response to the flamewar currently going on between Marcelo Rodriguez from Voxilla and Chris Lyman from Fonality.   The original posts are at:
+
+<a href="http://voxilla.com/soapvox/marcelo-rodriguez/fonality-is-fine-but-worrisome-869.html" title="http://voxilla.com/soapvox/marcelo-rodriguez/fonality-is-fine-but-worrisome-869.html" target="_blank">http://voxilla.com/soapvox/marcelo-rodriguez/fonality-is-fine-but-worrisome-869.html</a>
+
+<a href="http://voxilla.com/soapvox/marcelo-rodriguez/a-mini-fonality-furor-879.html" title="http://voxilla.com/soapvox/marcelo-rodriguez/a-mini-fonality-furor-879.html" target="_blank">http://voxilla.com/soapvox/marcelo-rodriguez/a-mini-fonality-furor-879.html</a>
+
+First I'm going to say that this discussion has been blown way out of proportion by the folks at Fonality, and Chris is showing some very childish tendencies.  I wouldn't be surprised if his responses alone steered prospective customers away from using his products.
+
+Speaking as a user of Asterisk in a large environment compared to Fonality's average install, most of his arguments about why his company's decisions are "correct" are blown way out of proportion.  I'm going to have to agree with Marcelo's concerns on this one, even in the face of Chris's responses refuting most of them (or downplaying the concern people should rightly feel).  Fonality's product sounds like a catch, and it's no wonder that small businesses are calling them up for phone systems, but I think Fonality is playing russian roullette with their customers systems.
+
+Marcelo's arguments are definitely straightforward and his responses are to the point, some would even say they're correct.  I'm going to argue from my standpoint some of the issues covered.  I'm not interested in a point for point bulletin as these are going to overlap and address some of the arguments stated.
+
+* Security and Management - It is not the PBX designer's job to manage the phone system.  Historically, larger companies house their own telecom system and manage their own extensions.  Hell, we have a Meridian that we manage fully in house.  Companies aren't stupid, the only reason they're picking the VoIP solutions over anything is that it's definitely cheaper and brings them into a whole new realm of possibility.  Digium hands over the software in a box just like any software company does, and doesn't require direct access to the servers.  And for the strong willed, there's even a *gasp* open source edition that's... free??!!??  Granted, setting up Asterisk is definitely not for the faint of heart, but with the advent of the Appliance, they've got a GUI Framework that is also *gasp* open source.  Seems to me that we're getting closer and closer to what Fonality is offering.
+* Call Detail Records - I'm not sure where Chris is getting his arguments about the use of CPU cycles and such.  We've been running our databases in tangent with our Asterisk systems along with call detail processing without any issues, period, and we're running PostgreSQL which is more memory intensive than MySQL is.  Ethics aside, I'd like to see the Federal Regulations that state that the information that Fonality is receiving (I'm assuming without the companies even knowing) is protected from their involvement.  Who's to say that they're not looking at the detail records.
+* Hosted Services - Chris argued that all the hosted services would have the same questionable problems that Fonality is being questioned about now, and I'm going to disagree with that one.  Vonage, just to name one, is by law considered a Phone Company, they are bound by federal regulations (Marcelo did state that, didn't he?) about how they handle their services and customers.  Also, that's a whole different ballgame.  Fonality handles the internal company systems, not the global communications of the company.  Honestly, is it so hard for them to release control of the systems their customers *bought* and provide patch support and such to the customer?
+* Ease of use - This is also a moot point.  Digium offers consulting and there are many contractors out there that will get a system up and running and turn over control without any uplink to "central" servers.  These services are even to the point where the only time they would have to come in is if the customer wanted a massive restructuring of their system.  Case in point, the entire development team of our system would be fully satisfied with leaving their post for an extended period of time without having to worry about the kind of stuff that Fonality is expecting their customers to fail in their capabilities on.
+
+As I said before, Fonality really isn't coming out on top on this one.  In my opinion, Digium's doing a great job of staying out of it (who knows, they may not even know about this whole argument).  The responses this has received will probably open a few eyes and make people realize that taking companies at face value isn't always the best idea.  I'm glad we went with a straight Digium solution, it's definitely served us well, and we don't have to worry about the things that Chris's empty promises claim to prevent.
+
+Aaron Daniel
+Senior Voice Analyst
+Sam Houston State University

@@ -1,0 +1,51 @@
+---
+title: Voicemail App Modifications
+author: Aaron Daniel
+date: 13/10/2006
+category: modifications
+tags: 
+
+After discussing with the Internet2 VoIP SIG, I've decided to go ahead and post most of the modifications from our system as patches.  This patch is everything we've done with the voicemail application.  Next will be the modifications done to the sip channel.
+
+Included in this patch:
+<ul>
+	<li>"From User" functionality
+<ul>
+	<li>This function allows us to send voicemail FROM the user that left the message, so you can just click reply when you receive the email</li>
+</ul>
+</li>
+	<li>"MP3 Conversion"
+<ul>
+	<li>This function converts the voicemail to mp3 format before emailing it to the user, providing more application saturation and not requiring special codecs in most cases.</li>
+</ul>
+</li>
+	<li>"Volume Gain"
+<ul>
+	<li>This increases (or decreases) the volume of messages that are emailed.</li>
+</ul>
+</li>
+	<li>"Forward Compatibility"
+<ul>
+	<li>I call this compatibility since it makes forwarding the message act the same as regular voicemail messages do.  The original handling was that it would be dropped in a user's inbox and the forward function does all the work.  I didn't write the patch, but we do have it in place and working and I didn't realy think it was necessary to remove it from the patch file.</li>
+</ul>
+</li>
+</ul>
+The only patch that actually requires any sort of database backend modification is the From User patch.  We use an email lookup table (named emaillookup... you can name it anything in the database, but it must be called emaillookup in extconfig) that contains all of our user's phone numbers, cid names, extension, and email addresses:
+<pre>Table "public.emaillookup"
+
+  Column  |         Type          | Modifiers
+----------+-----------------------+-----------
+ cidnum   | character varying(10) |
+ email    | character varying(60) |
+ cidname  | character varying(60) |
+ username | character varying(15) |
+ exten    | character varying(5)  |</pre>
+
+And in extconfig.conf:
+
+[settings]
+emaillookup =&gt; odbc,ast_cnf,emaillookup ; use  your standard db connection here
+
+Aside from that, if anyone has any questions, let me know.
+
+<a href="http://asterisk.mdaniel.net/wp-content/uploads/2006/10/20061013-voicemailpatch.txt" title="Voicemail Patch">Voicemail Patch</a>

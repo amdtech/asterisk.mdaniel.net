@@ -1,0 +1,77 @@
+---
+title: An ongoing battle... Which phone is better?
+author: Aaron Daniel
+date: 16/10/2006
+category: opinions
+tags: 
+
+As everyone may know, we currently run our Asterisk system with a mishmash of Cisco phones.  Mostly 7940's, some 7912's, and a few others here and there.  However, we're in the process of evaluating various types of phones to expand our network into a more standards compliant, capable network of phones.  This is what brings me here today, which phone do we like the best?
+
+~\n
+
+I think it'll be easier to just list out the pros and cons of our system that make it better for us.
+<ul>
+	<li>Cisco (7940, 7960, etc)
+<ul>
+	<li>Pros
+<ul>
+	<li>Easy configuration for some phones
+<ul>
+	<li>Particularly the 7940/7960 pairs are extremely simple to configure.  Provisioning an entire campus of these phones is as easy as dropping a 5 line configuration file in the tftp boot directory.</li>
+</ul>
+</li>
+	<li>Great sound quality out of the box</li>
+</ul>
+</li>
+	<li>Cons
+<ul>
+	<li>Configuration isn't unified
+<ul>
+	<li>If you try to configure anything but the 79[46]0's, get ready for some hell with binary commands to do text-&gt;binary conversions for the phone to download it's configs.</li>
+</ul>
+</li>
+	<li>Stripped SIP firmware
+<ul>
+	<li>The SIP firmware doesn't support everything it could, such as Shared Lines.</li>
+</ul>
+</li>
+	<li>COST</li>
+</ul>
+</li>
+</ul>
+</li>
+	<li>Polycom (430, 501, 601)
+<ul>
+	<li>Pros
+<ul>
+	<li>Unified configuration</li>
+	<li>Good sound quality</li>
+	<li>More SIP compliant</li>
+</ul>
+</li>
+	<li>Cons
+<ul>
+	<li>Slow boot time</li>
+	<li>Smaller screens and less XML browsing support</li>
+</ul>
+</li>
+</ul>
+</li>
+	<li>Aastra
+<ul>
+	<li>Pros
+<ul>
+	<li>Same physical design as Meridian phones</li>
+	<li>More customizable</li>
+</ul>
+</li>
+	<li>Cons
+<ul>
+	<li>Both of the phones we received were dead within one week of receiving them, so we weren't able to do much testing.</li>
+	<li>Shoddy VLAN support</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+We still haven't fully decided on a product to use, but I'm personally going to recommend the Polycom's, as they tend to be the better of the three major companies we looked into.  There are a number of other companies (Grandstream, SNOM, etc) whose products would be great for smaller companies, but they don't feel very "professional".

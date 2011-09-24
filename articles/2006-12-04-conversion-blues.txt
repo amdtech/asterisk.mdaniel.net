@@ -1,0 +1,17 @@
+---
+title: Conversion Blues
+author: Aaron Daniel
+date: 04/12/2006
+tags: 
+
+We've finally begun our approach into the full-scale deployment of Asterisk across the entire system.  I will say, the number of options that you have when installing such an open system are staggering, as well as the cost involved in such a move.  It sorta gives the impression of why most companies choose to go with the hosted solution, or have another company just come in and do the work for them.
+
+I figure I'll go over a few considerations we have had to take before undertaking something of this size.  I won't say it's huge, but it's not small either, with about 7000+ possible endpoints.  Asterisk is a free product, granted, but it's still a drop in the bucket when you're doing a single shot system-wide replacement of this many phones.
+
+Early estimates are putting us at about $2.5M, which I guess would be kinda conservative (jeesh, I wish I had this much money).  This number involves the upgrade of every single network switch under a Cisco 3750 on the main Administration part of our network, i.e. Not Dorms.  Once you have the switch capability, you can start working on the infrastructure and making sure that the switches can run your phones for an extended period of time, hence, you need a UPS.  Our average uptime in the event of failure is about 2 hours, which someone higher up deemed was the best length of time to allow for.  This infrastructure evaluation can also involve the evaluation of the server system as well as any upgrades required to get features you require.  Finally, consider the phones, and what you need for your system.
+
+The phones are what puts the project at the $2.5M number.  Let's say you go for full scale replacement of every single endpoint with an IP phone.  That's where the magic comes in, since you'll be dropping at LEAST $100 for each phone, with a little more for certain featuresets and users that like to have "pretty" phones that do more.  I think our numbers put us at about $1M for the entire phone order.  That's fun.
+
+Now take into consideration that students don't *really* need pretty IP phones, do they?  Personally, I would rather bring my own phone, especially if I could use a cordless one.  This brings something I wasn't too thrilled with when I first started working on this project: Analog Converters.  There are a number of options here, some of which are somewhat elegant, some are a little too risky from the hardware side.  You could either go out and get several thousand "personal" converters, let's say at $50 a piece, but the problem here is the control is with the user, not the sysadmin.  Or you could go the Citel route (which converted me, they make some really awesome analog/digital-converters).  At about $100 a port, this is more expensive than the personal converter solution, but much cheaper than the IP phone solution, since you don't have to have the UPS support you require with the IP phone solution since these devices take up FAR less power than a full dorm of IP phones.
+
+I'm not sure where this path is headed, but things finally seem to be coming together for our particular Asterisk installation.  I'm definitely hoping it goes smoothly, and hope they actually go through with this system wide replacement.

@@ -1,0 +1,96 @@
+---
+title: Polycom vs. Cisco
+author: Aaron Daniel
+date: 29/10/2006
+tags: 
+
+I was recently asked by my supervisors to create a document that contrasted Polycom phones to Cisco phones, on a point by point basis.  The original format is in a word document, so I've decided to convert that document to a blog entry for easier access for everyone.  Keep in mind that this is a point for point comparison for a management team, not for the technical users.  Most of this information is displayed in a manner that makes it easier for us to make a decision on what phones to use (if you can't tell, I'm pushing hard against Cisco).
+~\n
+<table border="1">
+<tr>
+<th></th>
+<th>Feature</th>
+<th>Polycom</th>
+<th>Cisco</th>
+</tr>
+<tr>
+<th>1</th>
+<td>Remote control</td>
+<td>Web interface, Phone configuration file overrides</td>
+<td>Limited configuration file options</td>
+</tr>
+<tr>
+<th>2</th>
+<td>Secretarial Functions</td>
+<td>Available for when Asterisk supports it</td>
+<td>Not available</td>
+</tr>
+<tr>
+<th>3</th>
+<td>SIP Compliance</td>
+<td>Yes</td>
+<td>Limited</td>
+</tr>
+<tr>
+<th>4</th>
+<td>Licensing</td>
+<td>None required</td>
+<td>New versions require CCM</td>
+</tr>
+<tr>
+<th>5</th>
+<td>Fully featured across the board</td>
+<td>Yes</td>
+<td>No</td>
+</tr>
+<tr>
+<th>6</th>
+<td>Unified Configuration</td>
+<td>Yes, exact same configuration files across the line</td>
+<td>No, each site in the line has a different type of configuration (flat file, xml, and binary)</td>
+</tr>
+<tr>
+<th>7</th>
+<td>Functional SIP Firmware</td>
+<td>Yes</td>
+<td>Limited</td>
+</tr>
+</table>
+<ol>
+	<li>Remote control
+<ul>
+	<li>We've had several issues in the past where user's forwarded their phone to a number that is only useful if accessed by the person AT the phone, not being forwarded in.  The only way to disable these functions and bypass the internal functions was to physically be at the phone.  There is NO other way to do this remotely, which can cause a management nightmare, especially if you have several people in remote locations.  With the polycoms, there are several different options for resetting functions, be it through the web interface that comes with the phone, or through the configuration files that the phone uses.  We can control almost every aspect of the phone and how it works from the server without need of physically being at the phone, aside from doing hardware checks.  This includes SIP compliant functions such as parsing SIP headers for control information about specific calls (the intercom function comes to mind, you can’t remotely auto answer a Cisco phone, but you can with a Polycom).</li>
+</ul>
+</li>
+	<li>Secretarial Functions
+<ul>
+	<li>Although the Cisco Call Manager supports shared line appearances (this is the main one, I don't know what other options the meridian has), the SIP version of the firmware does not allow this.  This ties in with the crippled firmware (number 7).  The Polycoms come stock with the functions we'll require to get SLA (shared line appearances) and BLA (busy line appearances) working, once it is fully supported by the backend (BLA currently does work, but it's not stable enough in our current version to use widely).</li>
+</ul>
+</li>
+	<li> SIP Compliance
+<ul>
+	<li>This is more related to the newer versions of the phone than to the 7940/7960's.  The 79x1's all have Call Manager specific code embedded in the firmwares, making them more difficult to troubleshoot and get working on the Asterisk platform.  For instance, the 7970/1's that we currently have do not have the correct NAT support required to work with Asterisk, don't support authentication passwords, and are riddled with Call Manager specific configurations in their subsystem.  Another point on the Cisco phones is that their newest 7940/60 firmware images do have Cisco Call Manager specific code, but it hasn't interfered with the configurations as of yet.  The Polycoms are designed from the ground up to work with a SIP compliant server, therefore their configuration is as simple as telling them what server to talk to, whether they're behind a NAT or not, and what to register as with what password.</li>
+</ul>
+</li>
+	<li>Licensing
+<ul>
+	<li>The newer Cisco phones don't have a “general” sip firmware anymore.  There is a note on the information site that states “All Cisco Unified IP phones require the purchase of a phone technology license, regardless of call protocol being used.” (<a href="http://www.cisco.com/en/US/products/hw/phones/ps379/products_data_sheet0900aecd802ff012.html">ref</a>).  The polycoms as stated before are designed to be run on third party SIP servers, so this point is moot for them.</li>
+	<li>This point may be less important depending on how Cisco wants to approach our particular setup, however, when it comes down to it, it would make more sense to use phones that aren't designed for any particular server and can be ported from one system to another if we end up not liking the system we've chosen.</li>
+</ul>
+</li>
+	<li>Fully featured across the board
+<ul>
+	<li>All the Cisco phones have different types of options and features.  If I stick a 7912 on someone's desk, and then set a 7940 on their desk, and then later set a 7970 on their desk, they'll have to relearn the phone structures and options all over again. The Cisco's are not consistent in their interfaces, which makes it much more difficult during upgrades and modifications to allow the user to be more comfortable with modifications to the system.  This is definitely apparent with a switch from CCM 7940's to SIP 7940's.  This is also related to the “crippled” SIP firmware (7).  However, we can drop a Polycom 430 on someone's desk, and then when they decide they need more call capacity, drop a 501, and then a 601 later on down the road, the interface is almost exactly the same from phone to phone, as is the underlying featureset.  The only thing they have to learn is how to deal with more lines per phone than with where the options went and what the phone does or doesn't do now.</li>
+</ul>
+</li>
+	<li>Unified Configuration
+<ul>
+	<li>The different Cisco IP phones have different kinds of configurations. For each version of phone we decide to install, the provisioning system has to be modified to include that new version.  The 7940/60's have a couple of flat files that control them, the 7912/15's require a binary conversion from text files, and the newer phones require XML files. With every upgrade, the firmware loads are different and are not consistent across the board. Every time a firmware comes out, we have to figure out what the upgrade path is and figure out why a phone won't upgrade when the rest of them worked just fine.  This quickly becomes a management nightmare.  The Polycom's have a single unified sip.cfg file that controls every aspect of the phone, from the codecs it's allowed to use, to what each button does, for EVERY single phone in the line.  Then each phone can have an override file, which is based on mac address.  If I have to replace a Polycom phone with a newer version or a larger number of lines/screen, all we have to do is change the name of the configuration file and that new phone is configured, in moments.  The upgrade path for the Polycoms is much easier as well, as all you have to do is drop the latest SIP firmware in the ftp directory and the phone pulls the latest version of that and the configuration files, and then you're done, no more headaches with upgrades since the process is more streamlined and universal.</li>
+</ul>
+</li>
+	<li>Functional SIP Firmware
+<ul>
+	<li>The Cisco SIP firmware only really goes so far as allowing you to answer the phone, conference another person in, and do call waiting.  One of the features I get complaints about is the ability to dial without picking up the phone.  Another one that is mentioned from time to time is that the phones no longer support idle XML services, as well as a very stripped down XML parser that doesn't allow us to do the kind of dynamic features in the services button that we could with the SCCP firmware.  However, the Polycom's are fully featured across the board, they all have a limited XHTML browser built in, and although it won't look as pretty on the smaller 430's as on the larger 601's, the functions will be exactly the same across the board.</li>
+</ul>
+</li>
+</ol>

@@ -1,0 +1,28 @@
+---
+title: Volgain patch for asterisk v1.2
+author: Aaron Daniel
+date: 11/10/2006
+category: modifications
+tags: 
+
+I'm attaching a patch that will allow users of the 1.2 version of asterisk to increase (or decrease) the gain on voicemails that are emailed.
+
+The version we use on campus also converts to mp3 for better client support, as well as a number of other patches if anyone would be interested in that.  Just post a comment and I'll see what I can do.
+
+In order to install the patch, run these commands:
+<pre>cd /path/to/asterisk/source
+patch -p0 --verbose &lt; /path/to/volgain.patch
+make
+make install # you can run this or just copy app_voicemail.so
+             # from apps to /usr/lib/asterisk/modules and restart asterisk</pre>
+&lt;edit&gt;
+
+Sorry guys, I left a section in the code that was part of our CONVERTMP3 function, it's been removed.
+
+<a title="Volgain Patch 2006-10-11" href="http://asterisk.mdaniel.net/wp-content/uploads/2006/10/20061011_volgain_onlydiff.txt">Volgain Patch 2006-10-11</a>
+
+&lt;edit 2&gt;
+
+Alright, I've updated the patch to work in 1.2.32, for those of you still on 1.2.  I'd recommend switching to 1.4 or 1.6 even, as the patch you're looking at here is actually part of the source code in future versions.
+
+<a href="http://asterisk.mdaniel.net/wp-content/uploads/2006/10/20090810_volgain_onlydiff.txt">20090810_volgain_onlydiff</a>

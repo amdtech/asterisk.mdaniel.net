@@ -1,0 +1,55 @@
+---
+title: MWI Notification
+author: Aaron Daniel
+date: 06/12/2006
+tags: 
+
+Since some people on the mailing lists are asking for this, I decided to release it into the public domain.
+
+Asterisk MWI is an interesting animal.  Most people don't realize that the MWI light is turned on simply by the presence or absence of the msg.txt files in the voicemail user's directory.  Using the method I'm outlining here will allow you to keep the load light on any call servers and have the voicemail server(s) handle notification and voicemail storage.  This method is also immediate, since every time a call is made, Asterisk does the processing and sending of the MWI instead of a cron job that's run every X minutes.
+
+The first thing you'll need is the notify_vmail_extern.sh script:
+<pre>#!/bin/bash
+
+CONTEXT=$1
+EXTEN=$2
+NUMVMS=$3
+
+SCMCMD="/usr/local/bin/notify_extern.sh $CONTEXT $EXTEN $NUMVMS"
+
+ssh ${SERVER} "$SCMCMD" &gt; /dev/null 2&gt;&amp;1 &amp;</pre>
+This script goes on the voicemail box(es).  Asterisk automatically sends the three arguments to the externnotify script, so don't worry about those, just make sure your script has them.  The SCMCMD is actually the script and controls that will be run on the other servers as well.  The ssh command is what actually does the notification.  You can have as many of these in here as necessary to send notifications out.  If your phone is registered to only one server, you can probably do some creative lookups based on the arguments (either a db lookup for location information based on extension).  If the phone can be registered anywhere, you can just put a series of ssh commands in to send the command to all the servers at once.
+
+In order for that script to work, you <strong>must</strong> have ssh keys from the user Asterisk is running under on the voicemail box to the user that Asterisk is running under on the other machines.  That is outside the scope of this article.
+
+Next, you'll need the script that runs on the call servers that will be doing the final notification:
+<pre>#!/bin/bash
+
+CONTEXT=$1
+EXTEN=$2
+NUMVMS=$3
+
+NOCMD="rm -f /var/spool/asterisk/voicemail/$CONTEXT/$EXTEN/INBOX/*"
+CREATECMD="mkdir -p /var/spool/asterisk/voicemail/$CONTEXT/$EXTEN/INBOX"
+
+if [[ $NUMVMS = "0" ]]; then
+        $NOCMD
+else
+        $NOCMD
+        $CREATECMD
+        for ((count = 1; count &lt;= $NUMVMS; count++)); do
+                <span style="color: #0000ff;">if [ $count -lt 10 ] ; then msgcount=000$count
+                elif [ $count -lt 100 ] ; then msgcount=00$count
+                elif [ $count -lt 1000 ] ; then msgcount=0$count
+                fi</span>
+                TOUCHCMD="touch /var/spool/asterisk/voicemail/$CONTEXT/$EXTEN/INBOX/msg<span style="color: #0000ff;">$msgcount</span>.txt"
+                $TOUCHCMD
+        done
+fi</pre>
+This script is pretty straightforward.  All it does is take the arguments sent, parse through the number of voicemails, and dependent on how many there are, either create that number of message files, or delete them outright.  This process is about as immediate as the ssh comand can get.
+
+Finally, on the voicemail server, edit the voicemail.conf file and configure the externnotify option like this:
+<pre>externnotify=/usr/local/bin/notify_vmail_extern.sh</pre>
+In Asterisk, do a reload app_voicemail.so and you're done :) Watch and make sure that it's working.
+
+<strong><span style="color: #0000ff;">UPDATE: </span></strong><span style="color: #000000;">In response to comments below, Asterisk 1.4 switched to checking for specific lengths of the msgXXXX.txt file name, so the old script didn't work anymore.  The update in blue above makes it work with later versions of 1.4.</span>

@@ -1,0 +1,12 @@
+---
+title: Internet2 VoIP SIG
+author: Aaron Daniel
+date: 09/10/2006
+category: presentations
+tags: 
+
+Just a quick post that I'll be presenting on October 12th at 1pm CDT for the Internet2 VoIP SIG.
+
+Here is the presentation I'll be using in PDF format:
+
+<a href="http://asterisk.mdaniel.net/wp-content/uploads/2006/10/20061012_voipsig.pdf" title="20061012_VOIPSIG_Presentation">20061012_VOIPSIG_Presentation</a>
