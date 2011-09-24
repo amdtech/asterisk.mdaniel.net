@@ -8,7 +8,7 @@ if ENV['RACK_ENV'] == 'development'
   use Rack::ShowExceptions
 end
 
-require 'rack/rewrite'
+require 'rack-rewrite'
 use Rack::Rewrite do
   r301 %r{/^(?:\?p=|archives/)3$}, '/2006/10/09/internet2-voip-sig'
   r301 %r{/^(?:\?p=|archives/)5$}, '/2006/10/11/volgain-patch-for-asterisk-v12'
