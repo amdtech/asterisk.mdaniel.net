@@ -9,4 +9,4 @@ Just a quick post that I'll be presenting on October 12th at 1pm CDT for the Int
 
 Here is the presentation I'll be using in PDF format:
 
-<a href="http://asterisk.mdaniel.net/wp-content/uploads/2006/10/20061012_voipsig.pdf" title="20061012_VOIPSIG_Presentation">20061012_VOIPSIG_Presentation</a>
+<a href="http://www.mdaniel.net/files/asterisk/20061012_voipsig.pdf" title="20061012_VOIPSIG_Presentation">20061012_VOIPSIG_Presentation</a>
