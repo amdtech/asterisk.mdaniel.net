@@ -48,4 +48,4 @@ emaillookup =&gt; odbc,ast_cnf,emaillookup ; use  your standard db connection he
 
 Aside from that, if anyone has any questions, let me know.
 
-<a href="http://mdaniel.net/files/asterisk/20061013-voicemailpatch.txt" title="Voicemail Patch">Voicemail Patch</a>
+<a href="http://files.amdte.ch/asterisk/20061013-voicemailpatch.txt" title="Voicemail Patch">Voicemail Patch</a>
